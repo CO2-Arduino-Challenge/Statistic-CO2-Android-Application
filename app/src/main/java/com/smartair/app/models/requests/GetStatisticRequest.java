@@ -17,6 +17,6 @@ public class GetStatisticRequest extends RetrofitSpiceRequest<GetStatisticRespon
     @Override
     public GetStatisticResponse loadDataFromNetwork() throws Exception {
         long time = System.currentTimeMillis();
-        return getService().getStatistic(deviceId, time - 60*60*1000 * 13, time);
+        return getService().getStatistic(deviceId, time - 60*60*1000 * 3, time);
     }
 }

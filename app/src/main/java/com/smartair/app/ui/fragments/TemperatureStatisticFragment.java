@@ -153,7 +153,7 @@ public class TemperatureStatisticFragment extends BaseFragment implements Loader
                 SmartAirProvider.INDICATION_CONTENT_URI,
                 new String[] {Indication.Contract.DATE, indicationColumn()},
                 Indication.Contract.DEVICE_ID + "=?", new String[] {deviceId},
-                null);
+                Indication.Contract.DATE);
     }
 
     @SuppressLint("SimpleDateFormat")

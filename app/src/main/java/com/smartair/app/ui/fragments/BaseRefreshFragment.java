@@ -31,7 +31,10 @@ public abstract class BaseRefreshFragment extends BaseFragment implements SwipeR
 
     @Override
     protected void onViewCreated() {
-        ((ActionBarActivity)getActivity()).setSupportActionBar(toolbar);
+        ActionBarActivity activity = (ActionBarActivity)getActivity();
+        activity.setSupportActionBar(toolbar);
+        activity.getSupportActionBar().setIcon(R.drawable.ic_launcher);
+
     }
 
     public Toolbar getToolbar() {
