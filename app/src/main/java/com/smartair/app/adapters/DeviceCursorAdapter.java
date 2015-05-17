@@ -27,7 +27,7 @@ public class DeviceCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View convertView, Context context, Cursor cursor) {
-        DeviceItemHolder holder = DeviceItemHolder.retrieve(convertView, -1);
+        DeviceItemHolder holder = DeviceItemHolder.retrieve(convertView);
 
         Device device = Device.fromCursor(cursor);
         holder.getTvDeviceAlias().setText(device.getDeviceName());

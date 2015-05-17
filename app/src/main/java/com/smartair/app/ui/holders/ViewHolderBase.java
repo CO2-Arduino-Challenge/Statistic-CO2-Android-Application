@@ -9,16 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class ViewHolderBase {
 
-    private int position = -1;
-
-    public int getPosition() {
-        return position;
-    }
-
-    protected void setPosition(int position) {
-        this.position = position;
-    }
-
     protected abstract void initHolder(@NotNull View v);
 
 
@@ -59,21 +49,8 @@ public abstract class ViewHolderBase {
         throw new Error("initCreator has to be overloaded!");
     }
 
-
-    /**
-     * Retrieve method is designed for convenience.
-     * Since it is fully a client code programmer's conscience convertTo keep a particular
-     * view's tag consistency - the method has been designed so convertTo achieve the most high performance
-     *
-     * @param v     The view that presumably is keeping a holder instance in its tag;
-     * @param <T>   The resulting holder type convertTo retrieve;
-     * @return      A valid holder instance that reflect the supplied view's visual hierarchy.
-     */
-
     @SuppressWarnings("unchecked")
-    public static <T extends ViewHolderBase> T retrieve(@NotNull View v, int position) {
-        T viewHolder = (T) v.getTag();
-        viewHolder.setPosition(position);
-        return viewHolder;
+    public static <T extends ViewHolderBase> T retrieve(@NotNull View v) {
+        return (T) v.getTag();
     }
 }

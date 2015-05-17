@@ -21,7 +21,7 @@ public class IndicationArrayAdapter extends ArrayAdapter<Indication> {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null)
             convertView = viewCreator.create(parent);
-        IndicationItemHolder holder = IndicationItemHolder.retrieve(convertView, position);
+        IndicationItemHolder holder = IndicationItemHolder.retrieve(convertView);
 
         Indication indication = getItem(position);
         holder.getTvTemperature().setText(String.valueOf(indication.getTemperature()));

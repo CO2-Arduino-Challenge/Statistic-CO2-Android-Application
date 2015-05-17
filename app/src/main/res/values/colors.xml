@@ -8,6 +8,8 @@
     <color name="blue">#c80605ff</color>
 
 
+    <color name="background_color_selected_tab">#ffff9945</color>
+
     <color name="increase_co2">@color/red</color>
     <color name="decrease_co2">@color/green</color>
 

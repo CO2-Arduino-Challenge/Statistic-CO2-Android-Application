@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.smartair.app.ui.widgets.ToolbarWidget
         android:id="@+id/toolbar"
-        local:gravityTitles="center"
-        local:titleColor="@android:color/white"
-        local:subtitleColor="@android:color/white"
+        app:gravityTitles="center"
+        app:titleColor="@android:color/white"
+        app:subtitleColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"/>
 
     <com.smartair.app.ui.widgets.SlidingTabLayout
         android:id="@+id/slidingTabLayout"
+        android:background="@color/primary_color"
+        app:colorIndicator="@color/background_color_selected_tab"
+        app:tabTextColor="@android:color/white"
+        app:tabDividerColor="@android:color/transparent"
+        app:tabTestSize="4sp"
         android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

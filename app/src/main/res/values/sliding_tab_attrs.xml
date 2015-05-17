@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlidingTabLayout">
+        <!--<attr name="tabColor" format="color" />-->
+        <attr name="tabTextColor" format="color" />
+        <attr name="tabDividerColor" format="color" />
+        <attr name="colorIndicator" format="color" />
+        <attr name="tabTestSize" format="dimension" />
+    </declare-styleable>
+</resources>
