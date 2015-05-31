@@ -36,6 +36,9 @@
             android:name=".ui.activities.StatisticActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="40639a711ede5f18654eb9e4127a3c3a624682ed" />
     </application>
 
 </manifest>
