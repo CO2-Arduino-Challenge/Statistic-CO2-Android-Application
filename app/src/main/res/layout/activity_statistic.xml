@@ -11,7 +11,7 @@
         app:titleColor="@android:color/white"
         app:subtitleColor="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"/>
+        android:layout_height="wrap_content"/>
 
     <com.smartair.app.ui.widgets.SlidingTabLayout
         android:id="@+id/slidingTabLayout"

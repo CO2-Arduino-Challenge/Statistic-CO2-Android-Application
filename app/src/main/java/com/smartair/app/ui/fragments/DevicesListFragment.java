@@ -10,7 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -34,7 +35,8 @@ import com.smartair.app.ui.activities.StatisticActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DevicesListFragment extends BaseRefreshFragment implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class DevicesListFragment extends BaseRefreshFragment
+        implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
 
     @InjectView(R.id.list)
     ListView list;
@@ -42,6 +44,9 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
     private final String UPDATE_KEY = "update_key";
     protected final String DEFAULT_USER = "700caba5-9d40-4d34-9d6c-b15e40c5425f";
     private SharedPreferences preferences;
+    private ActionBar actionBar;
+    private LoaderManager loaderManager;
+    private DeviceCursorAdapter adapter;
 
     public static DevicesListFragment getInstance() {
         return new DevicesListFragment();
@@ -57,13 +62,16 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
     protected void onViewCreated() {
         super.onViewCreated();
         initView();
-        initializeLoader();
+        loaderManager = getActivity().getSupportLoaderManager();
+        loaderManager.initLoader(LoaderConstants.DEVICE_LIST_LOADER, null, this);
         requestOnServer();
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
     }
 
     protected void initView() {
         updateLastDate(preferences.getLong(UPDATE_KEY, -1));
-        list.setAdapter(new DeviceCursorAdapter(getActivity(), null));
+        adapter = new DeviceCursorAdapter(getActivity(), null);
+        list.setAdapter(adapter);
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -71,8 +79,9 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
         toolbar.setVisibleSubtitle(lastUpdate != -1);
         if (lastUpdate != -1) {
             SimpleDateFormat dt = new SimpleDateFormat(getString(R.string.last_update_format));
-            ((ActionBarActivity) getActivity()).getSupportActionBar()
-                    .setSubtitle(getString(R.string.last_update, dt.format(new Date(lastUpdate))));
+            if (actionBar != null) {
+                actionBar.setSubtitle(getString(R.string.last_update, dt.format(new Date(lastUpdate))));
+            }
         }
     }
 
@@ -92,16 +101,8 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
         requestOnServer();
     }
 
-    private void initializeLoader() {
-        Loader loader = getActivity().getSupportLoaderManager().getLoader(LoaderConstants.DEVICE_LIST_LOADER);
-        if (loader == null)
-            getActivity().getSupportLoaderManager().initLoader(LoaderConstants.DEVICE_LIST_LOADER, null, this);
-        else
-            restartCursorLoader();
-    }
-
     protected void restartCursorLoader() {
-        getActivity().getSupportLoaderManager().restartLoader(LoaderConstants.DEVICE_LIST_LOADER, null, this);
+        loaderManager.restartLoader(LoaderConstants.DEVICE_LIST_LOADER, null, this);
     }
 
     protected void requestOnServer() {
@@ -122,7 +123,9 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
             @Override
             public void onRequestFailure(SpiceException spiceException) {
                 super.onRequestFailure(spiceException);
-                getSwipeRefreshLayout().setRefreshing(false);
+                if (getView() != null) {
+                    getSwipeRefreshLayout().setRefreshing(false);
+                }
             }
         });
     }
@@ -142,8 +145,10 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        ((DeviceCursorAdapter)list.getAdapter()).swapCursor(data);
-        getSwipeRefreshLayout().setRefreshing(false);
+        if (getView() != null) {
+            adapter.swapCursor(data);
+            getSwipeRefreshLayout().setRefreshing(false);
+        }
     }
 
     @Override
@@ -151,8 +156,9 @@ public class DevicesListFragment extends BaseRefreshFragment implements AdapterV
     }
 
     @Override
-    public void onDestroy() {
-        getActivity().getSupportLoaderManager().destroyLoader(LoaderConstants.DEVICE_LIST_LOADER);
-        super.onDestroy();
+    public void onDestroyView() {
+        loaderManager.destroyLoader(LoaderConstants.DEVICE_LIST_LOADER);
+        super.onDestroyView();
     }
+
 }

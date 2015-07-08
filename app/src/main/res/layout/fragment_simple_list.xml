@@ -12,7 +12,7 @@
         local:titleColor="@android:color/white"
         local:subtitleColor="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"/>
+        android:layout_height="wrap_content"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"

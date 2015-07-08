@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/tvDeviceAlias"
-        android:text="My Arduino"
+        tools:text="My Arduino"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -28,14 +28,14 @@
         <TextView
             style="@style/IndicationStyle"
             android:id="@+id/tvTemperature"
-            android:text="22.2* C"
+            tools:text="22.2* C"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             style="@style/IndicationChangingStyle"
             android:id="@+id/tvTemperatureChanged"
-            android:text="-0.3"
+            tools:text="-0.3"
             android:layout_toRightOf="@id/tvTemperature"
             android:layout_alignBottom="@id/tvTemperature"
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         <TextView
             style="@style/IndicationStyle"
             android:id="@+id/tvCO2"
-            android:text="CO2 18.8%"
+            tools:text="CO2 18.8%"
             android:layout_toLeftOf="@+id/tvCO2Changed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
         <TextView
             style="@style/IndicationChangingStyle"
             android:id="@+id/tvCO2Changed"
-            android:text="+0.8"
+            tools:text="+0.8"
             android:layout_alignParentRight="true"
             android:layout_alignBottom="@id/tvTemperature"
             android:layout_width="wrap_content"
@@ -75,7 +75,7 @@
         <TextView
             style="@style/IndicationStyle"
             android:id="@+id/tvHumidity"
-            android:text="tvHumidity"
+            tools:text="tvHumidity"
             android:layout_toLeftOf="@+id/anchorView"
             android:layout_alignBottom="@id/tvTemperature"
             android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
         <TextView
             style="@style/IndicationChangingStyle"
             android:id="@+id/tvHumidityChanged"
-            android:text="+0.8"
+            tools:text="+0.8"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/anchorView"
             android:layout_alignBottom="@id/tvTemperature"

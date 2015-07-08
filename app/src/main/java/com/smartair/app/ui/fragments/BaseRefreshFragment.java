@@ -1,7 +1,8 @@
 package com.smartair.app.ui.fragments;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import butterknife.InjectView;
@@ -18,23 +19,21 @@ public abstract class BaseRefreshFragment extends BaseFragment implements SwipeR
     @Override
     protected void setListeners() {
         swipeRefreshLayout.setColorSchemeResources(
-                android.R.color.holo_orange_light,
-                android.R.color.holo_blue_light,
-                android.R.color.holo_green_light,
-                android.R.color.holo_red_light);
+                R.color.holo_orange_light,
+                R.color.holo_blue_light,
+                R.color.holo_green_light,
+                R.color.holo_red_light);
         swipeRefreshLayout.setOnRefreshListener(this);
-    }
-
-    protected void setRefreshing(boolean refresh) {
-        swipeRefreshLayout.setRefreshing(refresh);
     }
 
     @Override
     protected void onViewCreated() {
-        ActionBarActivity activity = (ActionBarActivity)getActivity();
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.setSupportActionBar(toolbar);
-        activity.getSupportActionBar().setIcon(R.drawable.ic_launcher);
-
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setIcon(R.drawable.ic_launcher);
+        }
     }
 
     public Toolbar getToolbar() {
